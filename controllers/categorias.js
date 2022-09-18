@@ -11,7 +11,6 @@ const obtenerCategorias = async (req, res =response) => {
     const [total, Categorias] = await Promise.all([
         Categoria.countDocuments(query),
         Categoria.find(query)
-            .populate('usuario', 'nombre')
             .skip(Number(desde))
             .limit(Number(limite)),
     ]);
@@ -99,8 +98,7 @@ const crearCategoria = async(req, res = response) => {
 
     // Generar la data a guardar
     const data = {
-        nombre, 
-        usuario: req.usuario._id
+        nombre
     }
 
     //Prepara la categoria
